@@ -1,0 +1,20 @@
+{
+  "configurations": [
+    {
+      "name": "Heyoka (micromamba)",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${env:HOME}/.micromamba/envs/heyoka-env/include"
+      ],
+      "defines": [],
+      "macFrameworkPath": [
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+      ],
+      "compilerPath": "${env:HOME}/.micromamba/envs/heyoka-env/bin/arm64-apple-darwin20.0.0-clang++",
+      "cStandard": "c17",
+      "cppStandard": "c++23",
+      "intelliSenseMode": "macos-clang-arm64"
+    }
+  ],
+  "version": 4
+}

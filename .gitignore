@@ -1,0 +1,11 @@
+# Binaries and object files
+*.o
+*.dSYM/
+microjet
+main
+assets/monogram-black.png
+
+# IDE / OS files
+.DS_Store
+.venv/
+__pycache__/
