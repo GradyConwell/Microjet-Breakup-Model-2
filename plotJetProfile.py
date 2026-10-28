@@ -174,7 +174,7 @@ def readParameters(directory):
     parameters, recorded = {}, os.path.exists(f"{directory}/parameters.csv")
     if recorded:
         for line in open(f"{directory}/parameters.csv").read().splitlines()[1:]:
-            quantity, value, _ = line.split(",")
+            quantity, value = line.split(",")[:2]
             parameters[quantity] = float(value)
     else:
         parameters.update(MAIN_CPP_DEFAULTS)

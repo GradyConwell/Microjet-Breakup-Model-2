@@ -92,12 +92,12 @@ void advanceDropInAcousticWave(const AcousticWave& wave, double radius, double& 
 
 std::string acousticWaveParameterRows(const AcousticWave& wave) {
     const auto& s = wave.settings;
-    return std::format("acoustic_on_jet,{:d},\n
-                        acoustic_on_drops,{:d},\n
-                        acoustic_pressure,{},Pa\n"
-                       "acoustic_frequency,{},MHz\n
-                        acoustic_node_spacing,{},um\n
-                        acoustic_node_velocity,{},m/s\n"
+    return std::format("acoustic_on_jet,{:d},\n"
+                       "acoustic_on_drops,{:d},\n"
+                       "acoustic_pressure,{},Pa\n"
+                       "acoustic_frequency,{},MHz\n"
+                       "acoustic_node_spacing,{},um\n"
+                       "acoustic_node_velocity,{},m/s\n"
                        "acoustic_node_start,{},um\n",
                        s.actsOnJet, s.actsOnDrops, s.pressureAmplitude, wave.frequency * 1e-6, wave.nodeSpacing * 1e6,
                        s.patternVelocity, s.nodePositionAtStart * 1e6);

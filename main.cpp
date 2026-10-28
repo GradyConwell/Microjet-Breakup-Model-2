@@ -46,7 +46,7 @@
 #include <vector>
 #include <heyoka/heyoka.hpp> // ODE library
 
-#include "acousticWave.hpp"
+#include "acousticForcing.hpp"
 
 using namespace std;
 using namespace heyoka;
