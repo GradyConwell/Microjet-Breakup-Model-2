@@ -1,4 +1,0 @@
-Acoustic standing wave: on jet = true, on drops = true
-  pA = 5000 Pa (164.9 dB SPL), f = 1.180 MHz, node spacing = 145.4 um (1 per 145.4 um droplet spacing)
-  nodes move at 4.78 m/s, one at z = 72.7 um at t = 0
-  E = 44.07 J/m^3 = 1.20% of gamma / h0, Gor'kov contrast factor Phi = 0.8325
