@@ -9,3 +9,6 @@ assets/monogram-black.png
 .DS_Store
 .venv/
 __pycache__/
+
+# Simulation output
+results/

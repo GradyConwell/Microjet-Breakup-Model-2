@@ -62,8 +62,8 @@ struct AcousticWaveSettings {
 // Phase: the unforced drop centres pass through z = 4.78 m/s * t (mod 145.4 µm).
 
 inline const AcousticWaveSettings demoAcousticWave{
-    .actsOnJet = true,
-    .actsOnDrops = true,
+    .actsOnJet = false,
+    .actsOnDrops = false,
     .pressureAmplitude = 5000.0, // 165 dB SPL; within reach of ultrasonic levitators. E = 44 J/m^3, 1.2% of gamma / h0
     .dropletSpacing = 145.4e-6,
     .pressureNodesPerDropletSpacing = 1,

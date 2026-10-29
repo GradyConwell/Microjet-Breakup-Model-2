@@ -10,6 +10,7 @@ LDFLAGS ?= -L$(MICROMAMBA_ENV)/lib -lheyoka -Wl,-rpath,$(MICROMAMBA_ENV)/lib
 # Target and sources
 TARGET = microjet
 SRCS = $(wildcard *.cpp)
+HDRS = $(wildcard *.hpp)
 OBJS = $(SRCS:.cpp=.o)
 
 .PHONY: all run clean
@@ -19,7 +20,7 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CXX) $(OBJS) $(LDFLAGS) -o $@
 
-%.o: %.cpp
+%.o: %.cpp $(HDRS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Run the compiled executable
