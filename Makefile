@@ -1,14 +1,31 @@
 # Compiler and environment paths
 MICROMAMBA_ENV ?= $(HOME)/.micromamba/envs/heyoka-env
-CXX := micromamba run -r $(HOME)/.micromamba -n heyoka-env arm64-apple-darwin20.0.0-clang++
 
-# Flags
-CXXFLAGS ?= -std=c++23 -O2 -Wall -Wextra -Wno-pragma-clang-attribute \
-            -I$(MICROMAMBA_ENV)/include
-LDFLAGS ?= -L$(MICROMAMBA_ENV)/lib -lheyoka -Wl,-rpath,$(MICROMAMBA_ENV)/lib
+ifeq ($(OS),Windows_NT)
+    # Native Windows (conda/micromamba environment with clang++ and Make)
+    ENV_PREFIX ?= $(if $(CONDA_PREFIX),$(CONDA_PREFIX)/Library,$(MICROMAMBA_ENV)/Library)
+    CXX ?= clang++
+    CXXFLAGS ?= -std=c++23 -O2 -Wall -Wextra -Wno-pragma-clang-attribute \
+                -D_CRT_SECURE_NO_WARNINGS -I"$(ENV_PREFIX)/include"
+    LDFLAGS ?= -L"$(ENV_PREFIX)/lib" -lheyoka
+    TARGET = microjet.exe
+    RUN_CMD = $(TARGET)
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Darwin)
+        CXX := micromamba run -r $(HOME)/.micromamba -n heyoka-env arm64-apple-darwin20.0.0-clang++
+    else
+        # Linux / WSL2
+        CXX := micromamba run -r $(HOME)/.micromamba -n heyoka-env clang++
+    endif
+    CXXFLAGS ?= -std=c++23 -O2 -Wall -Wextra -Wno-pragma-clang-attribute \
+                -I$(MICROMAMBA_ENV)/include
+    LDFLAGS ?= -L$(MICROMAMBA_ENV)/lib -lheyoka -Wl,-rpath,$(MICROMAMBA_ENV)/lib
+    TARGET = microjet
+    RUN_CMD = ./$(TARGET)
+endif
 
-# Target and sources
-TARGET = microjet
+# Sources and objects
 SRCS = $(wildcard *.cpp)
 HDRS = $(wildcard *.hpp)
 OBJS = $(SRCS:.cpp=.o)
@@ -25,7 +42,7 @@ $(TARGET): $(OBJS)
 
 # Run the compiled executable
 run: $(TARGET)
-	./$(TARGET)
+	$(RUN_CMD)
 
 clean:
-	rm -rf $(OBJS) $(TARGET) build/
+	rm -rf $(OBJS) microjet microjet.exe build/
